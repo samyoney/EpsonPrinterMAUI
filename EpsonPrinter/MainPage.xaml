@@ -1,0 +1,218 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EpsonPrinter.MainPage"
+             Title="Epson Printer">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Spacing="20"
+            Padding="20"
+            VerticalOptions="Start">
+
+            <!-- Header -->
+            <Label
+                Text="EPSON PRINTER"
+                FontSize="28"
+                FontAttributes="Bold"
+                HorizontalOptions="Center"
+                TextColor="#2ED573"
+                Margin="0,10,0,20" />
+
+            <!-- Printer Settings Section -->
+            <Frame
+                BorderColor="#E0E0E0"
+                CornerRadius="10"
+                Padding="15"
+                HasShadow="True">
+                <VerticalStackLayout Spacing="15">
+                    <Label
+                        Text="Cài đặt máy in"
+                        FontSize="20"
+                        FontAttributes="Bold"
+                        TextColor="#333333" />
+
+                    <!-- Printer Model Selection -->
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            Text="Loại máy in:"
+                            FontSize="14"
+                            TextColor="#666666" />
+                        <Picker
+                            x:Name="PrinterModelPicker"
+                            FontSize="16"
+                            SelectedIndexChanged="OnPrinterModelChanged">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>TM303H621W</x:String>
+                                    <x:String>TM55-611W</x:String>
+                                    <x:String>SBM30-901W</x:String>
+                                    <x:String>TM-m30II</x:String>
+                                    <x:String>TM-P80</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </VerticalStackLayout>
+
+                    <!-- Language Model Selection -->
+                    <VerticalStackLayout Spacing="8">
+                        <Label
+                            Text="Ngôn ngữ:"
+                            FontSize="14"
+                            TextColor="#666666" />
+                        <Picker
+                            x:Name="LanguagePicker"
+                            FontSize="16">
+                            <Picker.ItemsSource>
+                                <x:Array Type="{x:Type x:String}">
+                                    <x:String>ANK</x:String>
+                                    <x:String>Japanese</x:String>
+                                    <x:String>Chinese</x:String>
+                                    <x:String>Korean</x:String>
+                                    <x:String>Thai</x:String>
+                                </x:Array>
+                            </Picker.ItemsSource>
+                        </Picker>
+                    </VerticalStackLayout>
+
+                    <!-- Search Button -->
+                    <Button
+                        x:Name="SearchButton"
+                        Text="🔍 Tìm máy in Bluetooth"
+                        FontSize="16"
+                        HeightRequest="50"
+                        CornerRadius="8"
+                        BackgroundColor="#2196F3"
+                        TextColor="White"
+                        Clicked="OnSearchPrintersClicked"
+                        Margin="0,10,0,0" />
+
+                    <!-- Printer List -->
+                    <VerticalStackLayout
+                        x:Name="PrinterListContainer"
+                        Spacing="10"
+                        IsVisible="False"
+                        Margin="0,10,0,0">
+
+                        <Label
+                            Text="Máy in khả dụng:"
+                            FontSize="14"
+                            TextColor="#666666" />
+
+                        <CollectionView
+                            x:Name="PrintersCollectionView"
+                            HeightRequest="150"
+                            SelectionMode="Single"
+                            SelectedItem="{Binding SelectedPrinter}"
+                            SelectionChanged="OnPrinterSelected">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame
+                                        Padding="10"
+                                        Margin="0,5,0,0"
+                                        BorderColor="#E0E0E0"
+                                        CornerRadius="5"
+                                        InputTransparent="True">
+                                        <Grid InputTransparent="True">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <VerticalStackLayout Grid.Column="0" Spacing="3" InputTransparent="True">
+                                                <Label
+                                                    Text="{Binding DeviceName}"
+                                                    FontSize="14"
+                                                    FontAttributes="Bold"
+                                                    TextColor="#333333"
+                                                    InputTransparent="True" />
+                                                <Label
+                                                    Text="{Binding Target}"
+                                                    FontSize="12"
+                                                    TextColor="#666666"
+                                                    InputTransparent="True" />
+                                            </VerticalStackLayout>
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="📡"
+                                                FontSize="20"
+                                                VerticalOptions="Center"
+                                                InputTransparent="True" />
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+
+                    <!-- Selected Printer -->
+                    <VerticalStackLayout
+                        x:Name="SelectedPrinterContainer"
+                        Spacing="5"
+                        IsVisible="False"
+                        Margin="0,10,0,0">
+                        <Label
+                            Text="Máy in đã chọn:"
+                            FontSize="14"
+                            TextColor="#666666" />
+                        <Label
+                            x:Name="SelectedPrinterLabel"
+                            FontSize="14"
+                            FontAttributes="Bold"
+                            TextColor="#2ED573" />
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Print Button -->
+            <Button
+                x:Name="PrintButton"
+                Text="🖨️ In mẫu"
+                FontSize="20"
+                HeightRequest="60"
+                CornerRadius="30"
+                BackgroundColor="#2ED573"
+                TextColor="White"
+                Clicked="OnPrintClicked"
+                HorizontalOptions="Fill"
+                IsEnabled="False"
+                Margin="0,10,0,0" />
+
+            <!-- Status Section -->
+            <Frame
+                x:Name="StatusFrame"
+                BorderColor="#E0E0E0"
+                CornerRadius="10"
+                Padding="15"
+                HasShadow="True"
+                IsVisible="False">
+                <VerticalStackLayout Spacing="10">
+                    <Label
+                        Text="Trạng thái"
+                        FontSize="16"
+                        FontAttributes="Bold"
+                        TextColor="#333333" />
+                    <Label
+                        x:Name="StatusLabel"
+                        FontSize="14"
+                        TextColor="Gray"
+                        LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Loading Indicator -->
+            <ActivityIndicator
+                x:Name="LoadingIndicator"
+                IsRunning="False"
+                IsVisible="False"
+                Color="#2ED573"
+                HeightRequest="50"
+                WidthRequest="50"
+                HorizontalOptions="Center" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>

@@ -3,11 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScannerMaui", "ScannerMaui\ScannerMaui.csproj", "{9FBD8C18-CC14-4438-9677-5D54D64B1BA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpsonPrinter", "EpsonPrinter\EpsonPrinter.csproj", "{9FBD8C18-CC14-4438-9677-5D54D64B1BA8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EpsonBinding", "EpsonBinding\EpsonBinding.csproj", "{56287176-7763-45E0-AC44-87F628A07823}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScannerApp.Tests", "ScannerApp.Tests\ScannerApp.Tests.csproj", "{EAFEB5A6-9414-07BD-5B81-42CAFB7923E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -37,7 +37,7 @@ function runMauiApp() {
     "dotnet",
     ["build", "-t:Run", "-f", "net8.0-android"],
     {
-      cwd: path.join(__dirname, "scannermaui"),
+      cwd: path.join(__dirname, "EpsonPrinter"),
     }
   );
 
